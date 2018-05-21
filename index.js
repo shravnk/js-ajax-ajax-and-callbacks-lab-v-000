@@ -4,7 +4,7 @@ $(document).ready(function (){
 function searchRepositories() {
   const searchTerms = document.getElementById('searchTerms').value
   $.get(`https://api.github.com/search/repositories?q=${searchTerms}`, function(response) {
-    $("#results").html(showRepositories(response));
+    $("#results").html(showRepositories(response))
   }).fail(error => {
     displayError()
   })
@@ -15,15 +15,13 @@ function showRepositories(response) {
   `<ul>${response.items.map(repo => {
     return (
       `<li>
-        <h1>${repo.name}</h1>
-        <p>${repo.description}</p>
-        <a href="${repo.html_url}">${repo.html_url}</a>
-        <p>${repo.owner.login}</p>
-        <img src="${repo.owner.avatar_url}" height="32" width="32">
-        <a href="${repo.owner.url}">${repo.owner.url}</a>
-        <a href="#" data-owner="${repo.owner.login}" data-repository="${repo.name}" onClick="showCommits(this)">Show Commits</a>
+      <h2>${repo.name}</h2>
+      <a href="${repo.html_url}">${repo.html_url}</a>
+      <h4>Created by: ${repo.owner.login}</h4>
+      <img src="${repo.owner.avatar_url}" height="32" width="32">
+      <a href="#" data-owner="${repo.owner.login}" data-repository="${repo.name}" onClick="showCommits(this)">Commits</a>
       </li>`)}).join('')}
-  </ul>`
+      </ul>`
   return repoList
 }
 
