@@ -6,7 +6,9 @@ function searchRepositories() {
   const searchTerms = document.getElementById('searchTerms').value
   $.get(`https://api.github.com/search/repositories?q=${searchTerms}`, function(response) {
     $("#results").html(showRepositories(response))
-  }).fail(error => {displayError()})
+  }).fail(error => {
+    displayError()
+  })
 }
 
 function showRepositories(response) {
@@ -20,8 +22,6 @@ function showRepositories(response) {
       <a href="#" data-owner="${repo.owner.login}" data-repository="${repo.name}" onClick="showCommits(this)">Commits</a>
       </li>`)}).join('')}
       </ul>`
-
-
   return repoList
 }
 
